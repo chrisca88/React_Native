@@ -11,14 +11,17 @@ const MainScreen = ({taskList}) => {
   const [ input, setInput ] = useState("") // estado inicial es un string vacio del input
   const [ modalVisible, setModalVisible ] = useState(false)
   const [ taskActive, setTaskActive ] = useState({})
-  
+
+  const date = new Date()
+  const [ id, setId] = useState((date.getTime()))
   
   
   const onAddTask = () =>{
+    setId(date.getTime())
     setList([
       ...list,
       {
-        id: list.length + 1,
+        id: id,
         task: input,
         completed: false
       }
@@ -51,6 +54,12 @@ const MainScreen = ({taskList}) => {
       setModalVisible(!modalVisible)
   }
 
+  const onPressDelete = () =>{
+    const remainTask = list.filter(taskList => taskList.id !== taskActive.id)
+    setList(remainTask)
+    setModalVisible(!modalVisible)
+  }
+
   
   return (
     <View style = {styles.container}>
@@ -68,6 +77,7 @@ const MainScreen = ({taskList}) => {
         setModalVisible={setModalVisible}
         taskActive={taskActive}
         onPressStatus={onPressStatus}
+        onPressDelete={onPressDelete}
       />
     </View>
   )

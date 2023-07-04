@@ -6,7 +6,8 @@ const ModalTask = (
         modalVisible,
         setModalVisible,
         taskActive,
-        onPressStatus
+        onPressStatus,
+        onPressDelete
     }
 ) => {
   return (
@@ -32,6 +33,11 @@ const ModalTask = (
                   onPress={() => onPressStatus(false)}
                   >
                       <Text style={styles.textStyle}>Note yet</Text>
+                  </Pressable>
+                  <Pressable
+                  style={[styles.button, styles.buttonDelete]}
+                  onPress={() => onPressDelete()}>
+                      <Text style={styles.textStyle}>Delete</Text>
                   </Pressable>
                   <Pressable
                   style={[styles.button, styles.buttonClose]}
@@ -97,6 +103,10 @@ const styles = StyleSheet.create({
         backgroundColor: 'green'
       },
       buttonNotYet:{
+        backgroundColor: 'mediumpurple'
+      },
+      buttonDelete:{
         backgroundColor: 'red'
       }
+
 })
